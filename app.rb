@@ -6,12 +6,13 @@ class Bookmarks < Sinatra::Base
     register Sinatra::Reloader
   end
 
-  get '/' do
-    'Hello World!'
-  end
-
   get '/bookmarks' do
-    "here's where the book are meant to be"
+    @bookmarks = [
+      "https://www.youtube.com/",
+      "https://github.com/",
+      "https://www.codewars.com/dashboard"
+    ]
+    erb :'bookmarks/index'
   end
   # start the server if ruby file executed directly
   run! if app_file == $0
