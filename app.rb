@@ -1,4 +1,3 @@
-require "bundler/setup"
 require 'sinatra/base'
 require 'sinatra/reloader'
 
@@ -9,6 +8,10 @@ class Bookmarks < Sinatra::Base
 
   get '/' do
     'Hello World!'
+  end
+
+  get '/bookmarks' do
+    "here's where the book are meant to be"
   end
   # start the server if ruby file executed directly
   run! if app_file == $0
