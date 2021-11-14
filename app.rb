@@ -10,15 +10,19 @@ class BookmarkManager < Sinatra::Base
 
   get '/' do
     p ENV
-    "Welcome to Bookmark Manager"
+    erb(:index)
   end
 
-
-  
   get '/bookmarks' do
     p ENV
     @bookmarks = Bookmark.all
     erb :'bookmarks'
+  end
+
+  post '/add' do
+    p params[:new_bookmark]
+    Bookmark.create(new_bookmark: params[:new_bookmark])
+    redirect '/bookmarks'
   end
   
   # start the server if ruby file executed directly

@@ -17,3 +17,19 @@ describe '.all' do
       expect(bookmarks).to include "http://www.google.com"
     end
 end
+
+describe '.create' do
+  it 'returns a list of bookmarks' do
+    connection = PG.connect(dbname: 'bookmark_manager_test')
+    
+    # Add the test data
+    connection.exec("INSERT INTO bookmarks (url) VALUES('http://www.makersacademy.com');")
+    connection.exec("INSERT INTO bookmarks (url) VALUES('http://www.destroyallsoftware.com');")
+    connection.exec("INSERT INTO bookmarks (url) VALUES('http://www.google.com');")
+    
+    Bookmark.create(new_bookmark: 'https://academy.zenva.com/')
+    bookmarks = Bookmark.all
+
+    expect(bookmarks).to include "https://academy.zenva.com/"
+  end
+end
